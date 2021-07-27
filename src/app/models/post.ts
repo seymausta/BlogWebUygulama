@@ -1,5 +1,5 @@
-export class Value {
-    id:number
+export class Post {
+    id?:number
     title:string
     content:string
 }

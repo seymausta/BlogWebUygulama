@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Value } from '../models/value';
+import { Post } from '../models/post';
 import * as Editor from 'ckeditor5/build/ckeditor';
-//import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { PostService } from '../post.service';
+import { Identifiers } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-value',
@@ -10,8 +12,9 @@ import * as Editor from 'ckeditor5/build/ckeditor';
   styleUrls: ['./value.component.scss']
 })
 export class ValueComponent implements OnInit {
+
   title = 'My Blog: Seyma is Coding';
-  public Editor = Editor;
+  public Editor = Editor; 
   editorConfig= {
 					
     toolbar: {
@@ -54,19 +57,52 @@ export class ValueComponent implements OnInit {
       
     };
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private postService:PostService) { }
 
-  values:Value[]=[];
+  values:Post[]=[];
+  content1 : string;
+  content2 :string;
+  datax : Post;
+  
 
   ngOnInit(){
-    this.getValues().subscribe(data=>{
+    /*this.getValues().subscribe(data=>{
       this.values=data
-    })
+    })*/
   }
 
+  /*getValues(){
+    return this.http.get<Post[]>("https://localhost:44323/api/posts")
+  }*/
 
-  getValues(){
-    return this.http.get<Value[]>("https://localhost:44323/WeatherForecast")
+  getValues() {
+    this.postService.getValues().subscribe((response: Post[]) => this.values = response);
+  } 
+  GetSingle(id: number) {
+    this.postService.GetSingle(id).subscribe((response: Post) => this.datax = response);
   }
+   
+  public saveContent( ) {
+   console.log("Title saved:"+this.content1);
+   console.log("Content saved: " +this.content2);
+  }
+  
+  PostAdd( Title :string,  Content:string) {
+    alert(Title + " " +Content);
+
+    let postPersonel: Post = {
+      
+      title: String(Title),
+      content: String(Content)
+    };
+ 
+    this.postService.PostAdd(postPersonel).subscribe((response: Post) => {
+      if (response) {
+        this.values.unshift(response);
+        this.datax = response;
+      }
+    });
+  }
+  
 
 }

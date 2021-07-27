@@ -289,7 +289,6 @@
         </g>
       </svg>
   
-      <span>{{ title }} </span>
   
       <svg id="rocket-smoke" alt="Rocket Ship Smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
         <path id="Path_40" data-name="Path 40" d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z" transform="translate(-147.025 -140.939)" fill="#f5f5f5"/>
@@ -298,49 +297,42 @@
     </div>
   
     <!-- Resources -->
-    <h2>New Post</h2>
-    <p>You can create a new post in here:</p>
-    <br />
-  
-    <form (ngSubmit)="saveContent()" >
-      <!--input type="text" #txtAdi /-->
-     <br />
-      <div> 
-        <br />
-        <h4>Title</h4>
-       <input  type="text" name="content1" [(ngModel)]="content1" />
-       <!--input  type="text" #content1 /-->
-     </div>
-     <br />
-    
-      <ckeditor [(ngModel)]="content2" name="content2" [editor]="Editor" [config]="editorConfig"></ckeditor>
-      <br />
-    
-      <!--button type="submit" class="btn btn-success" >Kaydet</button-->
-      <button (click)="PostAdd(content1, content2)">Content Ekle</button>
+   
+        <h2>New Post</h2>
+        <p>You can update your post in here:</p>
+        <br>
+        
+        <div>
+          <h2>Get Post</h2>
+          <input  type="text" name="id" [(ngModel)]="id" />
+          <br>
+          <br>
+          <button (click)="GetSingle(id)">ID'ye sahip olanı getir</button>
+          <br>
+          <br>
+          <span *ngIf="datax">{{datax.id + " " + datax.title + " " + datax.content}}</span>
+        </div>
+        <hr>
+        
+        <form>
+            <div> 
+            <h4>Id :</h4>
+                <br/>
+                <input  type="text" name="id" [(ngModel)]="id" />
+              <h4>Title :</h4>
+             <input  type="text" name="title" [(ngModel)]="title" />
+             <h4>Content :</h4>
+             <ckeditor [(ngModel)]="content" name="content" [editor]="Editor" [config]="editorConfig"></ckeditor>
+          <br />      
+        </div>
+        <button (click)="PostUpdate(id, title,content)">Update Post</button>
       
-</form>
-
-<form>
-<button (click)="getValues()">Tüm İçerikleri Getir</button>
-<br/>
-<table>
-  <tr *ngFor="let value of values">
-      <td>{{value.id}}</td>
-      <td>{{value.title}}</td>
-      <td>{{value.content}}</td>
-  </tr>
-</table>
-</form>
+    </form>
     <!-- Next Steps -->
     <h3>Productivity is always good!</h3>
-    <!--p>Productivity is always good!</p-->
-    
-  
+
     <input type="hidden" #selection>
-  
-  
-    <!-- Footer -->
+
     <footer>
         Love My Posts?&nbsp;
         <a href="https://github.com/seymausta" target="_blank" rel="noopener"> Give my repo a star.
@@ -360,7 +352,5 @@
   
   </div>
 
-  
-  
 
 

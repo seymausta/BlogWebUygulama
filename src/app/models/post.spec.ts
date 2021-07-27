@@ -1,7 +1,7 @@
-import { Value } from './value';
+import { Post } from './post';
 
 describe('Value', () => {
   it('should create an instance', () => {
-    expect(new Value()).toBeTruthy();
+    expect(new Post()).toBeTruthy();
   });
 });
