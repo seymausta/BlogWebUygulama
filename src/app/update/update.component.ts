@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../post.service';
+import { PostService } from '../services/post.service';
 import { Router } from '@angular/router'; 
 import { Post } from '../models/post';
 import * as Editor from 'ckeditor5/build/ckeditor';
@@ -11,7 +11,7 @@ import * as Editor from 'ckeditor5/build/ckeditor';
 })
 export class UpdateComponent implements OnInit {
   values:Post[]=[];
-  datax : Post;
+  post : Post;
   id:number;
   title:string;
   content:string;
@@ -74,14 +74,14 @@ export class UpdateComponent implements OnInit {
         this.postService.PostUpdate(updatePost).subscribe((response: Post) => {
           if (response) {
             this.postService.getValues();
-            this.datax = response;
+            this.post = response;
           }
         });
       }
 
-      GetSingle(id: number) {
-        this.postService.GetSingle(id).subscribe((response: Post) => this.datax = response);
-      }
+      /*GetSingle(id: number) {
+        this.postService.GetSingle(id).subscribe((response: Post) => this.post = response);
+      }*/
 
   
 

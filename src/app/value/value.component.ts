@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../models/post';
 import * as Editor from 'ckeditor5/build/ckeditor';
-import { PostService } from '../post.service';
-import { Identifiers } from '@angular/compiler';
-
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-value',
@@ -13,6 +11,8 @@ import { Identifiers } from '@angular/compiler';
 })
 export class ValueComponent implements OnInit {
 
+  totalLength:number;
+  page:number=1;
   title = 'My Blog: Seyma is Coding';
   public Editor = Editor; 
   editorConfig= {
@@ -57,7 +57,9 @@ export class ValueComponent implements OnInit {
       
     };
 
-  constructor(private http:HttpClient, private postService:PostService) { }
+  constructor(
+    private http:HttpClient, 
+    private postService:PostService) { }
 
   values:Post[]=[];
   content1 : string;
@@ -76,7 +78,8 @@ export class ValueComponent implements OnInit {
   }*/
 
   getValues() {
-    this.postService.getValues().subscribe((response: Post[]) => this.values = response);
+    this.postService.getValues().subscribe((response: Post[]) =>{ this.values = response
+    this.totalLength=response.length;});
   } 
   GetSingle(id: number) {
     this.postService.GetSingle(id).subscribe((response: Post) => this.datax = response);
@@ -88,8 +91,6 @@ export class ValueComponent implements OnInit {
   }
   
   PostAdd( Title :string,  Content:string) {
-    alert(Title + " " +Content);
-
     let postPersonel: Post = {
       
       title: String(Title),
@@ -102,6 +103,7 @@ export class ValueComponent implements OnInit {
         this.datax = response;
       }
     });
+    
   }
   
 

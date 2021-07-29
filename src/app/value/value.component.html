@@ -324,13 +324,21 @@
 <form>
 <button (click)="getValues()">Tüm İçerikleri Getir</button>
 <br/>
+<div class="container mt-5 mb-5">
+  <div class="row">
 <table>
-  <tr *ngFor="let value of values">
-      <td>{{value.id}}</td>
-      <td>{{value.title}}</td>
-      <td>{{value.content}}</td>
+  <tr *ngFor="let value of values | paginate: { itemsPerPage: 4, 
+    currentPage: page,
+    totalItems:totalLength
+   }" class="col-lg-4 border text-center mt-4 mb-5 p-1">
+      <p>{{value.id}}</p>
+      <p><b>{{value.title}}</b></p>
+      <p>{{value.content}}</p>
   </tr>
 </table>
+</div>
+</div>
+<pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls>
 </form>
     <!-- Next Steps -->
     <h3>Productivity is always good!</h3>

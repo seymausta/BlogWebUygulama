@@ -1,22 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http'
-import { AppComponent } from './app.component';
-import { ValueComponent } from './value/value.component';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { UpdateComponent } from './update/update.component';
-import { MainComponent } from './main/main.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
+import { AppComponent } from './app.component';
+import { ValueComponent } from './value/value.component';
+import { UpdateComponent } from './update/update.component';
+import { PostsComponent } from './posts/posts.component';
+import { NavComponent } from './nav/nav.component';
+import { PostDetailComponent } from './posts/post-detail/post-detail.component';
+import { PostEditComponent } from './posts/post-edit/post-edit.component';
+import { AlertifyService } from './services/alertify.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ValueComponent,
     UpdateComponent,
-    MainComponent,
-     
+    PostsComponent,
+    NavComponent,
+    PostDetailComponent,
+    PostEditComponent,
+    
   
   ],
   imports: [
@@ -24,10 +32,11 @@ import { MainComponent } from './main/main.component';
     AppRoutingModule, 
     HttpClientModule,
     CKEditorModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
  
   ],
-  providers: [{provide: 'apiUrl', useValue:"localhost:44323/api/"}],
+  providers: [AlertifyService,{provide: 'apiUrl', useValue:"localhost:44323/api/"}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
