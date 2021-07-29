@@ -6,10 +6,11 @@ import { PostsComponent} from './posts/posts.component';
 import { NavComponent } from './nav/nav.component';
 import { PostDetailComponent } from './posts/post-detail/post-detail.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
+import { PostCreateComponent } from './posts/post-create/post-create.component';
  
 const routes: Routes = [
   {path: 'posts', component: PostsComponent},
-  {path: 'create', component: ValueComponent},
+  {path: 'create', component: PostCreateComponent},
   {path: 'update/:postId', component: PostEditComponent},
   {path: 'postDetail/:postId', component: PostDetailComponent},
   {path: '**', redirectTo:"posts", pathMatch:"full"},

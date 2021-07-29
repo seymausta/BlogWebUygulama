@@ -8,7 +8,7 @@
             <h4>Content :</h4>
             <ckeditor [(ngModel)]="content" name="content" [editor]="Editor" [config]="editorConfig"></ckeditor>
             <br />
-            <button (click)="PostUpdate(this.id,title,content)">Save</button>
+            <button class="btn btn-primary disabled btn-lg" (click)="PostUpdate(this.id,title,content)">Save</button>
         </div>
     </div>
 </main>

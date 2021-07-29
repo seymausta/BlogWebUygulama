@@ -1,0 +1,18 @@
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <br>
+            <h2>Title</h2>
+            <input  type="text" name="title" [(ngModel)]="title" id="title" />
+            <br>
+        </div>
+        <div class="col-md-12 text-center">
+            <br>
+            <ckeditor [(ngModel)]="content" name="content2" [editor]="Editor" [config]="editorConfig"></ckeditor>
+            <br>
+        </div>
+    </div>
+    <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-primary disabled btn-lg" (click)="PostAdd(title, content)">Save</button>
+    </div>
+</main>

@@ -25,15 +25,13 @@ export class PostService {
   }
   PostAdd(value: Post) {
     this.alertifyService.success("Post başarıyla eklendi.");
-    //this.router.navigateByUrl('/postDetail/'+["value.id"]);
+   // this.router.navigateByUrl('/postDetail/'+[value.id]);
     return this.httpClient.post("https://localhost:44323/api/create/",value);
     
   }
   PostUpdate(post:Post){
     this.alertifyService.success("Post başarıyla güncellendi.");
-    this.router.navigateByUrl('/postDetail/'+["post.id"]);
-    //return this.httpClient.put(`${this.apiUrl + 'update/'}/${post.id}`,post);
-    //return this.httpClient.put(`${this.apiUrl}update/${post.id}`,post);
+    this.router.navigateByUrl('/postDetail/'+[post.id]);
     return this.httpClient.put("https://localhost:44323/api/update/?post.id"+post.id,post);
    
 

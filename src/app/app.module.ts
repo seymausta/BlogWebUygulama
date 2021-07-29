@@ -14,6 +14,7 @@ import { NavComponent } from './nav/nav.component';
 import { PostDetailComponent } from './posts/post-detail/post-detail.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import { AlertifyService } from './services/alertify.service';
+import { PostCreateComponent } from './posts/post-create/post-create.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AlertifyService } from './services/alertify.service';
     NavComponent,
     PostDetailComponent,
     PostEditComponent,
+    PostCreateComponent,
     
   
   ],
