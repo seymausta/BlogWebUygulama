@@ -64,7 +64,7 @@ export class UpdateComponent implements OnInit {
   ngOnInit(): void {
   }
  
-      PostUpdate(Id:number,Title :string,  Content:string) {
+      /*PostUpdate(Id:number,Title :string,  Content:string) {
         alert(Id+ " "+Title + " " +Content);
         let updatePost: Post = {
           id: Number(Id),
@@ -77,7 +77,7 @@ export class UpdateComponent implements OnInit {
             this.post = response;
           }
         });
-      }
+      }*/
 
       /*GetSingle(id: number) {
         this.postService.GetSingle(id).subscribe((response: Post) => this.post = response);

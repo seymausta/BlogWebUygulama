@@ -1,18 +1,39 @@
-<main role="main" class="container">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <br>
-            <h2>Title</h2>
-            <input  type="text" name="title" [(ngModel)]="title" id="title" />
-            <br>
+<main role="main">
+    <div class="container">
+        <div class="row">
+            <form [formGroup]="postAddForm" (ngSubmit)="PostAdd()" >
+                <div class="col-md-12 text-center">
+                    <br>
+                    <h2>Title</h2>
+                    <div class="form-group">
+                        <!--input  type="text" name="title" [(ngModel)]="title" id="title" /-->
+                        <input type="text" id="title" formControlName="title"  class="form-control">
+                        <br>
+                        <span class="help-block"
+                            *ngIf="postAddForm.get('title').hasError('required') && postAddForm.get('title').touched">
+                            Title is required
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <br>
+                    <!--ckeditor [(ngModel)]="content" name="content2" [editor]="Editor" [config]="editorConfig"></ckeditor-->
+                    <ckeditor class="form-control" id="content" formControlName="content" [editor]="Editor"
+                        [config]="editorConfig">
+                    </ckeditor>
+                    <br>
+                    <span class="help-block"
+                        *ngIf="postAddForm.get('content').hasError('required') && postAddForm.get('content').touched">
+                        Please write content.
+                    </span>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-lg"
+                        [disabled]="!postAddForm.valid">Save</button>
+                </div>
+                
+            </form>
         </div>
-        <div class="col-md-12 text-center">
-            <br>
-            <ckeditor [(ngModel)]="content" name="content2" [editor]="Editor" [config]="editorConfig"></ckeditor>
-            <br>
-        </div>
-    </div>
-    <div class="col-md-12 text-center">
-        <button type="button" class="btn btn-primary disabled btn-lg" (click)="PostAdd(title, content)">Save</button>
     </div>
 </main>

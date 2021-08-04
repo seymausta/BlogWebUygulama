@@ -4,6 +4,7 @@ import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post.service';
 import * as Editor from 'ckeditor5/build/ckeditor';
 import { PostsComponent } from '../posts.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-post-edit',
@@ -18,6 +19,7 @@ export class PostEditComponent implements OnInit {
   title:string;
   content:string;
   id:number;
+  userId:number;
 
   public Editor = Editor; 
   editorConfig= {
@@ -61,17 +63,19 @@ export class PostEditComponent implements OnInit {
       licenseKey: '',
       
     };
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostService) { }
+  constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private authService:AuthService) { }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['postId']; 
+    this.userId = this.authService.getCurrentUserId(); 
   }
 
-  PostUpdate(Id:number,Title :string,  Content:string) {
+  PostUpdate(Id:number,Title :string,  Content:string,UserId:number) {
     let updatePost: Post = {
       id: Number(Id),
       title: String(Title),
-      content: String(Content)
+      content: String(Content),
+      userId:Number(UserId),
     };
     this.postService.PostUpdate(updatePost).subscribe((response: Post) => {
       if (response) {

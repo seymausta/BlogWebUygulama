@@ -90,7 +90,7 @@ export class ValueComponent implements OnInit {
    console.log("Content saved: " +this.content2);
   }
   
-  PostAdd( Title :string,  Content:string) {
+  /*PostAdd( Title :string,  Content:string) {
     let postPersonel: Post = {
       
       title: String(Title),
@@ -104,7 +104,7 @@ export class ValueComponent implements OnInit {
       }
     });
     
-  }
+  }*/
   
 
 }

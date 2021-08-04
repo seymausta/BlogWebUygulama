@@ -4,6 +4,13 @@ import { PostService } from 'src/app/services/post.service';
 import { HttpClient } from '@angular/common/http';
 import * as Editor from 'ckeditor5/build/ckeditor';
 import { ActivatedRoute } from '@angular/router';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from "@angular/forms";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-post-create',
@@ -13,11 +20,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostCreateComponent implements OnInit {
   postList:Post[]=[];
-  title : string;
-  content :string;
+ // title : string;
+ // content :string;
   post : Post;
   public Editor = Editor; 
   id:number;
+  
+  postAddForm: FormGroup; 
+
   editorConfig= {
 					
     toolbar: {
@@ -63,12 +73,26 @@ export class PostCreateComponent implements OnInit {
   constructor(
     private postService: PostService,
     private http:HttpClient,
-    private activatedRoute: ActivatedRoute ) { }
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private authService:AuthService ) { }
+    
+    
 
-  ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.params['postId']; 
+  createPostForm() {
+    this.postAddForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      content: ['', Validators.required]
+    });
   }
-  PostAdd( Title :string,  Content:string) {
+
+  ngOnInit(){
+    this.createPostForm();
+    this.id = this.activatedRoute.snapshot.params['postId']; 
+   // this.userId  = this.authService.getCurrentUserId();
+  }
+  
+  /*PostAdd( Title :string,  Content:string) {
     let createPost: Post = {
       
       title: String(Title),
@@ -82,6 +106,36 @@ export class PostCreateComponent implements OnInit {
       }
     });
     
+  }*/
+
+  PostAdd(){
+    if(this.postAddForm.valid){
+      this.post = Object.assign({},this.postAddForm.value)
+      //Todo
+      this.post.userId = this.authService.getCurrentUserId();
+      this.postService.PostAdd(this.post);
+      
+      
+    }
   }
+
+  /*PostAdd( Title :string,  Content:string, UserId:number) {
+    alert("dfghdf");
+    let createPost: Post = {
+      
+      title: String(Title),
+      content: String(Content),
+      userId: Number(UserId)
+    };
+ 
+    this.postService.PostAdd(createPost).subscribe((response: Post) => {
+      if (response) {
+        this.postList.unshift(response);
+        this.post = response;
+      }
+    });
+    
+  }*/
+  
 
 }

@@ -13,15 +13,15 @@ export class PostsComponent implements OnInit {
   
   totalLength:number;
   page:number=1;
+  values:Post[]=[];
+  post : Post;
+ 
 
   constructor(private http:HttpClient, private postService:PostService) { }
 
   ngOnInit(){
-    this.getValues()  
+    this.getValues();
   }
-
-  values:Post[]=[];
-  post : Post;
 
   getValues() {
     this.postService.getValues().subscribe((response: Post[]) =>{ this.values = response

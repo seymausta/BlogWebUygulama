@@ -7,9 +7,11 @@ import { NavComponent } from './nav/nav.component';
 import { PostDetailComponent } from './posts/post-detail/post-detail.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
+import { RegisterComponent } from './register/register.component';
  
 const routes: Routes = [
   {path: 'posts', component: PostsComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'create', component: PostCreateComponent},
   {path: 'update/:postId', component: PostEditComponent},
   {path: 'postDetail/:postId', component: PostDetailComponent},

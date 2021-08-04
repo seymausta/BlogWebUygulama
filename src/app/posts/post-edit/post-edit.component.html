@@ -4,11 +4,11 @@
 
             <br>
             <h4>Title :</h4>
-            <input type="text" name="title" [(ngModel)]="title" />
+            <input type="text" name="title" [(ngModel)]="title"  />
             <h4>Content :</h4>
             <ckeditor [(ngModel)]="content" name="content" [editor]="Editor" [config]="editorConfig"></ckeditor>
             <br />
-            <button class="btn btn-primary disabled btn-lg" (click)="PostUpdate(this.id,title,content)">Save</button>
+            <button class="btn btn-primary btn-lg" (click)="PostUpdate(this.id,title,content,this.userId)">Save</button>
         </div>
     </div>
 </main>
