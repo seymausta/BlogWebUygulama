@@ -8,6 +8,7 @@ import { PostDetailComponent } from './posts/post-detail/post-detail.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { RegisterComponent } from './register/register.component';
+import { HomePageComponent } from './home-page/home-page.component';
  
 const routes: Routes = [
   {path: 'posts', component: PostsComponent},
@@ -15,7 +16,9 @@ const routes: Routes = [
   {path: 'create', component: PostCreateComponent},
   {path: 'update/:postId', component: PostEditComponent},
   {path: 'postDetail/:postId', component: PostDetailComponent},
-  {path: '**', redirectTo:"posts", pathMatch:"full"},
+  {path: '', component: HomePageComponent},
+  {path: '**', redirectTo:"#href", pathMatch:"full"},
+  
 
 ];
  

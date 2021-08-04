@@ -5,6 +5,7 @@ import { PostService } from 'src/app/services/post.service';
 import * as Editor from 'ckeditor5/build/ckeditor';
 import { PostsComponent } from '../posts.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-edit',
@@ -63,13 +64,26 @@ export class PostEditComponent implements OnInit {
       licenseKey: '',
       
     };
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private authService:AuthService) { }
+  constructor(private activatedRoute: ActivatedRoute, 
+    private postService: PostService, 
+    private authService:AuthService, 
+    private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['postId']; 
     this.userId = this.authService.getCurrentUserId(); 
+        if (this.id < 1)
+        return;
+
+        this.loadPost(this.id);
   }
 
+  loadPost(id) {
+    this.httpClient
+        .get("https://localhost:44323/api/detail/?id="+id)
+            .subscribe((response: Post) => this.post = response
+            );
+}
   PostUpdate(Id:number,Title :string,  Content:string,UserId:number) {
     let updatePost: Post = {
       id: Number(Id),
