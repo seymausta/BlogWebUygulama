@@ -6,25 +6,29 @@ import * as Editor from 'ckeditor5/build/ckeditor';
 import { PostsComponent } from '../posts.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { PostDetailComponent } from '../post-detail/post-detail.component';
 
 @Component({
   selector: 'app-post-edit',
   templateUrl: './post-edit.component.html',
   styleUrls: ['./post-edit.component.css'],
-  providers:[PostService]
+  providers: [PostService]
 })
 export class PostEditComponent implements OnInit {
 
-  values:Post[]=[];
-  post : Post;
-  title:string;
-  content:string;
-  id:number;
-  userId:number;
+  values: Post[] = [];
+  post: Post;
+  title: string;
+  content: string;
+  id: number;
+  userId: number;
+  imgPath: string;
 
-  public Editor = Editor; 
-  editorConfig= {
-					
+  public res: { dbPath: '' };
+
+  public Editor = Editor;
+  editorConfig = {
+
     toolbar: {
       items: [
         'heading',
@@ -61,44 +65,64 @@ export class PostEditComponent implements OnInit {
         'mergeTableCells'
       ]
     },
-      licenseKey: '',
-      
-    };
-  constructor(private activatedRoute: ActivatedRoute, 
-    private postService: PostService, 
-    private authService:AuthService, 
+    licenseKey: '',
+
+  };
+  
+
+  constructor(private activatedRoute: ActivatedRoute,
+    private postService: PostService,
+    private authService: AuthService,
     private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.params['postId']; 
-    this.userId = this.authService.getCurrentUserId(); 
-        if (this.id < 1)
-        return;
+    this.id = this.activatedRoute.snapshot.params['postId'];
+    this.userId = this.authService.getCurrentUserId();
+   // this.imgPath = this.res.dbPath;
+    if (this.id < 1)
+      return;
 
-        this.loadPost(this.id);
+    this.loadPost(this.id);
+
+    //this.imgPath = this.createImgPath(this.res.dbPath);
+
+  
   }
 
   loadPost(id) {
     this.httpClient
-        .get("https://localhost:44323/api/detail/?id="+id)
-            .subscribe((response: Post) => this.post = response
-            );
-}
-  PostUpdate(Id:number,Title :string,  Content:string,UserId:number) {
+      .get("https://localhost:44323/api/detail/?id=" + id)
+      .subscribe((response: Post) => this.post = response
+      );
+  }
+
+  PostUpdate(Id: number, Title: string, Content: string, UserId: number) {
     let updatePost: Post = {
       id: Number(Id),
       title: String(Title),
       content: String(Content),
-      userId:Number(UserId),
+      userId: Number(UserId),
+      imgPath: this.res.dbPath,
     };
     this.postService.PostUpdate(updatePost).subscribe((response: Post) => {
       if (response) {
         this.postService.getValues();
         this.post = response;
+        
       }
     });
-    
-   
+
+
   }
+
+  public uploadFinished = (event) => {
+    this.res = event;
+  }
+
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44323/${serverPath}`;
+  }
+
+
 
 }

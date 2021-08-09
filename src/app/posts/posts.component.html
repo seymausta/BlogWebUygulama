@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-16 my-4 text-center">
     <div *ngFor="let value of values | paginate: { itemsPerPage: 4, 
@@ -6,21 +5,32 @@
       totalItems:totalLength
      }" class="col">
       <!--h2 class="mt-5 pt-2">{{value.id}}</h2-->
-      <div class="card shadow-sm mb-4 " >
+      <div class="card shadow-sm mb-4 ">
+
+        <div class="card-header ">
+          <h5 class="mt-2 pt-2">{{value.id}}</h5>
+        </div>
         
-        <div class="card-header "><h5 class="mt-2 pt-2">{{value.id}}</h5></div>
         <div class="card-body">
           <h4 class="card-title"><b>{{value.title}}</b></h4>
-          <br>
+         
+        <img class="card-img-top" [src]="x.createImgPath(value.imgPath)" style="display: block;
+         margin-left: auto;
+         margin-right: auto;
+         width: 300px;
+         height: 225px; 
+         border-radius: 8px;" alt="Card image cap"> <br>
           <p class="card-text" style="overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
-          -webkit-line-clamp: 4;
+          -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;" [innerHTML]="value.content"></p>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-              <button type="button" routerLink="/postDetail/{{value.id}}" routerLinkActive="active" class="btn btn-outline-secondary">View</button>
-              <button type="button" routerLink="/update/{{value.id}}" routerLinkActive="active"class="btn  btn-outline-secondary">Edit</button>
+              <button type="button" routerLink="/postDetail/{{value.id}}" routerLinkActive="active"
+                class="btn btn-outline-secondary">View</button>
+              <button type="button" routerLink="/update/{{value.id}}" routerLinkActive="active"
+                class="btn  btn-outline-secondary">Edit</button>
             </div>
             <small class="text-muted">9 mins</small>
           </div>
@@ -30,5 +40,5 @@
   </div>
   <br>
   <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls>
-<br>
+  <br>
 </div>

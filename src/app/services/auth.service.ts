@@ -49,7 +49,8 @@ export class AuthService {
 
       });
     this.alertifyService.success("Başarılı kullanıcı kaydı.");
-    this.router.navigateByUrl('/posts');
+    this.alertifyService.warning("Post eklemek için giriş yapınız!");
+    this.router.navigateByUrl('');
 
   }
   saveToken(token) {

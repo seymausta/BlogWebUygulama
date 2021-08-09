@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
+import { PostCreateComponent } from './post-create/post-create.component';
 
 @Component({
   selector: 'app-main',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css'],
-  providers: [PostService]
+  providers: [PostService,PostCreateComponent]
 })
 export class PostsComponent implements OnInit {
   
@@ -17,7 +18,8 @@ export class PostsComponent implements OnInit {
   post : Post;
  
 
-  constructor(private http:HttpClient, private postService:PostService) { }
+  constructor(private http:HttpClient, private postService:PostService,
+    public x: PostCreateComponent) { }
 
   ngOnInit(){
     this.getValues();

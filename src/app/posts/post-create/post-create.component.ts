@@ -77,7 +77,8 @@ export class PostCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService:AuthService ) { }
     
-    
+    public res: {dbPath: ''};
+   
 
   createPostForm() {
     this.postAddForm = this.formBuilder.group({
@@ -85,6 +86,15 @@ export class PostCreateComponent implements OnInit {
       content: ['', Validators.required]
     });
   }
+  public uploadFinished = (event) => {
+    this.res = event;
+  }
+
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44323/${serverPath}`;
+  }
+  
+
 
   ngOnInit(){
     this.createPostForm();
@@ -113,6 +123,7 @@ export class PostCreateComponent implements OnInit {
       this.post = Object.assign({},this.postAddForm.value)
       //Todo
       this.post.userId = this.authService.getCurrentUserId();
+      this.post.imgPath= this.res.dbPath;
       this.postService.PostAdd(this.post);
       
       
@@ -136,6 +147,7 @@ export class PostCreateComponent implements OnInit {
     });
     
   }*/
-  
+
+ 
 
 }

@@ -18,6 +18,7 @@ import { AlertifyService } from './services/alertify.service';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     PostCreateComponent,
     RegisterComponent,
     HomePageComponent,
+    UploadComponent,
 
 
   ],

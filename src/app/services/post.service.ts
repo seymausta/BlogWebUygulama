@@ -10,7 +10,6 @@ import { AlertifyService } from './alertify.service';
   providedIn: 'root'
 })
 export class PostService {
-
   constructor(
     private httpClient: HttpClient,
     private router: Router,
@@ -44,6 +43,7 @@ export class PostService {
       });
      
    }
+   
    
     
 }

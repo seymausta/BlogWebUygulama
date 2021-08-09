@@ -5,7 +5,12 @@
             <h2 class="mt-3 pt-3"><b>{{post.title}}</b></h2>
         
             <div  class="mt-3 pt-3" [innerHTML]="post.content"></div>
-            
+            <br>
+            <img [src]="x.createImgPath(post.imgPath)" alt="picture" style="display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%; border-radius: 8px;">
+            <br><br>
         </div>
 
     </div>

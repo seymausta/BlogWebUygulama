@@ -26,6 +26,9 @@
                         *ngIf="postAddForm.get('content').hasError('required') && postAddForm.get('content').touched">
                         Please write content.
                     </span>
+                    <br />
+                    <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+                <br />
                 </div>
 
                 <div class="col-md-12 text-center">
